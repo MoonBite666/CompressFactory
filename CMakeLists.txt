@@ -25,14 +25,15 @@ find_package(Qt6 6.2 REQUIRED COMPONENTS Quick)
 
 
 qt_add_executable(${PROJECT_NAME}
-    main.cpp
+        src/main.cpp
 )
 
 qt_add_qml_module(${PROJECT_NAME}
     URI CompressFactory
     VERSION 1.0
     QML_FILES
-        Main.qml
+        qml/Main.qml
+        qml/SideTabBar.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

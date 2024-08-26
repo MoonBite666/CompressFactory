@@ -1,14 +1,15 @@
 #Main.qml
-import QtQuick
-import QWindowKit 1.0
+import QtQuick 2.15
+import QtQuick.Controls
 
+import QWindowKit 1.0
 
 Window {
     id: window
     width: 800
     height: 600
     color: darkStyle.windowBackgroundColor
-    title: qsTr("Hello, world!")
+    title: qsTr("CompressFactory")
     Component.onCompleted: {
         windowAgent.setup(window)
         window.visible = true
@@ -41,7 +42,7 @@ Window {
         Text {
             anchors {
                 verticalCenter: parent.verticalCenter
-                left: iconButton.right
+                left: parent.left
                 leftMargin: 10
             }
             horizontalAlignment: Text.AlignHCenter
@@ -51,4 +52,33 @@ Window {
             color: "#ECECEC"
         }
     }
+    SideTabBar{
+        id: sideTabBar
+        anchors.top: titleBar.bottom
+    }
+    Rectangle {
+        z: -1
+        anchors{
+            top: titleBar.bottom
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        color: "lightgray"
+
+        // 打开菜单按钮
+        Button {
+            text: qsTr("打开菜单")
+            anchors.centerIn: parent
+            onClicked: {
+                if(sideTabBar.state === "collapsed"){
+                    sideTabBar.state = "expanded"
+                }
+                else{
+                    sideTabBar.state = "collapsed"
+                }
+            }
+        }
+    }
+
 }

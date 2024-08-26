@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 
     QWK::registerTypes(&engine);
 
-    const QUrl url(QStringLiteral("qrc:/CompressFactory/Main.qml"));
+    const QUrl url(QStringLiteral("qrc:/CompressFactory/qml/Main.qml"));
     QObject::connect(
         &engine,
         &QQmlApplicationEngine::objectCreated,
