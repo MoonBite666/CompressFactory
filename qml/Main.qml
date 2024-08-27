@@ -1,6 +1,7 @@
 #Main.qml
 import QtQuick 2.15
 import QtQuick.Controls
+import QtQuick.Layouts
 
 import QWindowKit 1.0
 
@@ -57,29 +58,56 @@ Window {
         anchors.top: titleBar.bottom
         state: "collapsed"
     }
-    Rectangle {
-        z: -1
-        anchors{
-            top: titleBar.bottom
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
-        color: "lightgray"
+    StackLayout{
+        z:-1
+        width: parent.width
+        anchors.top: titleBar.bottom
+        anchors.bottom: parent.bottom
+        currentIndex: sideTabBar.currentIndex
+        Rectangle {
+            anchors{
+                top: titleBar.bottom
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+            color: "lightgray"
 
-        // 打开菜单按钮
-        Button {
-            text: qsTr("打开菜单")
-            anchors.centerIn: parent
-            onClicked: {
-                if(sideTabBar.state === "collapsed"){
-                    sideTabBar.state = "expanded"
-                }
-                else{
-                    sideTabBar.state = "collapsed"
+            // 打开菜单按钮
+            Button {
+                text: qsTr("打开菜单")
+                anchors.centerIn: parent
+                onClicked: {
+                    if(sideTabBar.state === "collapsed"){
+                        sideTabBar.state = "expanded"
+                    }
+                    else{
+                        sideTabBar.state = "collapsed"
+                    }
                 }
             }
         }
+        Rectangle {
+            anchors{
+                top: titleBar.bottom
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+            color: "blue"
+        }
+        Rectangle {
+            anchors{
+                top: titleBar.bottom
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+            color: "green"
+        }
+
     }
+
+
 
 }

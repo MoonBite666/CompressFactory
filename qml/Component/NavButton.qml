@@ -17,7 +17,7 @@ Rectangle {
 
     property alias text: t.text
 
-
+    signal clicked()
 
     // 图片
     RowLayout{
@@ -44,11 +44,11 @@ Rectangle {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
+        hoverEnabled: true
         onClicked: {
-            console.log("Audio Clicked")
+            navButton.clicked()
         }
 
-        // 鼠标悬停效果
         onEntered: {
             buttonImage.source = navButton.imageSourceChecked
             navButton.color = navButton.darkerColor // 改变背景颜色

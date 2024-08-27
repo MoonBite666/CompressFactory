@@ -11,6 +11,8 @@ Rectangle {
     height: parent.height - 32
     color: "gray"
 
+    property int currentIndex: 0
+
     // 菜单项
     ColumnLayout {
         anchors.fill: parent
@@ -23,6 +25,10 @@ Rectangle {
             imageSourceChecked: "qrc:/icons/checked/file-video.svg"
             text: "Video"
             baseColor: "gray"
+            onClicked: {
+                console.log("Video Clicked")
+                sideTabBar.currentIndex = 0
+            }
         }
 
         NavButton{
@@ -30,6 +36,10 @@ Rectangle {
             imageSourceChecked: "qrc:/icons/checked/file-audio.svg"
             text: "Audio"
             baseColor: "gray"
+            onClicked: {
+                console.log("Audio Clicked")
+                sideTabBar.currentIndex = 1
+            }
         }
 
         NavButton{
@@ -37,6 +47,10 @@ Rectangle {
             imageSourceChecked: "qrc:/icons/checked/wrench.svg"
             text: "Tools"
             baseColor: "gray"
+            onClicked: {
+                console.log("Tool Clicked")
+                sideTabBar.currentIndex = 2
+            }
         }
     }
 
