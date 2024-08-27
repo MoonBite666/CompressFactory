@@ -1,6 +1,8 @@
 import QtQuick
+import QtQuick.Window
 import QtQuick.Controls
 import QtQuick.Layouts
+import "Component"
 
 
 Rectangle {
@@ -13,26 +15,28 @@ Rectangle {
     ColumnLayout {
         anchors.fill: parent
         spacing: 10
-
-        Button {
-            text: qsTr("菜单项 1")
-            onClicked: {
-                console.log("菜单项 1 被点击")
-            }
+        Layout.fillWidth: true
+        Layout.preferredWidth: parent.width*0.4
+        Layout.fillHeight: true
+        NavButton{
+            imageSourceUnchecked: "qrc:/icons/unchecked/file-video.svg"
+            imageSourceChecked: "qrc:/icons/checked/file-video.svg"
+            text: "Video"
+            baseColor: "gray"
         }
 
-        Button {
-            text: qsTr("菜单项 2")
-            onClicked: {
-                console.log("菜单项 2 被点击")
-            }
+        NavButton{
+            imageSourceUnchecked: "qrc:/icons/unchecked/file-audio.svg"
+            imageSourceChecked: "qrc:/icons/checked/file-audio.svg"
+            text: "Audio"
+            baseColor: "gray"
         }
 
-        Button {
-            text: qsTr("菜单项 3")
-            onClicked: {
-                console.log("菜单项 3 被点击")
-            }
+        NavButton{
+            imageSourceUnchecked: "qrc:/icons/unchecked/wrench.svg"
+            imageSourceChecked: "qrc:/icons/checked/wrench.svg"
+            text: "Tools"
+            baseColor: "gray"
         }
     }
 
@@ -66,4 +70,13 @@ Rectangle {
             }
         }
     ]
+
+    // Connections{
+    //     target: sideTabBar
+    //     onStateChanged: {
+    //         if(sideTabBar.state === "collapsed") {
+    //
+    //         }
+    //     }
+    // }
 }

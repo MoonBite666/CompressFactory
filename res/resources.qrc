@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/unchecked/file-video.svg</file>
+        <file>icons/unchecked/file-audio.svg</file>
+        <file>icons/unchecked/wrench.svg</file>
+        <file>icons/checked/file-video.svg</file>
+        <file>icons/checked/file-audio.svg</file>
+        <file>icons/checked/wrench.svg</file>
+    </qresource>
+</RCC>

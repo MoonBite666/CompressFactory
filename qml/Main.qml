@@ -55,6 +55,7 @@ Window {
     SideTabBar{
         id: sideTabBar
         anchors.top: titleBar.bottom
+        state: "collapsed"
     }
     Rectangle {
         z: -1
