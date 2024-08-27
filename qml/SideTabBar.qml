@@ -15,12 +15,14 @@ Rectangle {
 
     // 菜单项
     ColumnLayout {
+        id: tabBarLayout
         anchors.fill: parent
         spacing: 10
         Layout.fillWidth: true
         Layout.preferredWidth: parent.width*0.4
         Layout.fillHeight: true
         NavButton{
+            id: videoButton
             imageSourceUnchecked: "qrc:/icons/unchecked/file-video.svg"
             imageSourceChecked: "qrc:/icons/checked/file-video.svg"
             text: "Video"
@@ -32,6 +34,7 @@ Rectangle {
         }
 
         NavButton{
+            id: audioButton
             imageSourceUnchecked: "qrc:/icons/unchecked/file-audio.svg"
             imageSourceChecked: "qrc:/icons/checked/file-audio.svg"
             text: "Audio"
@@ -43,6 +46,7 @@ Rectangle {
         }
 
         NavButton{
+            id: toolButton
             imageSourceUnchecked: "qrc:/icons/unchecked/wrench.svg"
             imageSourceChecked: "qrc:/icons/checked/wrench.svg"
             text: "Tools"
@@ -85,12 +89,15 @@ Rectangle {
         }
     ]
 
-    // Connections{
-    //     target: sideTabBar
-    //     onStateChanged: {
-    //         if(sideTabBar.state === "collapsed") {
-    //
-    //         }
-    //     }
-    // }
+    Connections {
+       target: sideTabBar
+       function onCurrentIndexChanged() {
+           videoButton.isSelected = currentIndex === 0
+           audioButton.isSelected = currentIndex === 1
+           toolButton.isSelected = currentIndex === 2
+           videoButton.toggleSelection()
+           audioButton.toggleSelection()
+           toolButton.toggleSelection()
+       }
+    }
 }
