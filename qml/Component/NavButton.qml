@@ -17,7 +17,7 @@ Rectangle {
 
     property alias text: t.text
 
-    property bool isSelected: false
+    property bool isSelected: true
     color: isSelected ? selectedColor : baseColor
 
     property int refIndex: 0
@@ -28,37 +28,18 @@ Rectangle {
     RowLayout{
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        anchors.leftMargin: 15
+        anchors.leftMargin: 10
         spacing: 5
 
         Rectangle {
             id: indicator
+
             color: "cyan"
             Layout.alignment: Qt.AlignVCenter
-            width: 6
+            width: 5
             height: navButton.height * 0.6
             radius: 5
 
-            PropertyAnimation {
-                id: stretchAnimation
-                running: false
-                target: indicator
-                property: "scale"
-                from: 0
-                to: 1
-                duration: 200
-                easing.type: Easing.InOutQuad
-            }
-            PropertyAnimation {
-                id: shrinkAnimation
-                running: false
-                target: indicator
-                property: "scale"
-                from: 1
-                to: 0
-                duration: 200
-                easing.type: Easing.InOutQuad
-            }
         }
         Image {
             id: buttonImage
@@ -69,6 +50,105 @@ Rectangle {
         }
         Text {
             id: t
+        }
+
+        SequentialAnimation{
+            id: stretchAnimation
+            running: false
+            ScriptAction{
+                script: {
+                    if(!indicator.visible && !stretchAnimation.running){
+                        indicator.visible = true
+                        console.log("Stretch " + buttonImage.x + " sub 10")
+                        buttonImage.x -= 10
+                        t.x -= 10
+                        console.log("Now " + buttonImage.x)
+                    }
+                }
+            }
+            ParallelAnimation{
+                PropertyAnimation {
+                    target: indicator
+                    property: "scale"
+                    from: 0
+                    to: 1
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                PropertyAnimation {
+                    target: indicator
+                    property: "color"
+                    from: "transparent"
+                    to: "cyan"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                PropertyAnimation {
+                    target: buttonImage
+                    property: "x"
+                    from: buttonImage.x
+                    to: buttonImage.x + 10
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                PropertyAnimation {
+                    target: t
+                    property: "x"
+                    from: t.x
+                    to: t.x + 10
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
+        SequentialAnimation{
+            id: shrinkAnimation
+            running: false
+            ParallelAnimation{
+                PropertyAnimation {
+                    target: indicator
+                    property: "scale"
+                    from: 1
+                    to: 0
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                PropertyAnimation {
+                    target: indicator
+                    property: "color"
+                    from: "cyan"
+                    to: "transparent"
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                PropertyAnimation {
+                    target: buttonImage
+                    property: "x"
+                    from: buttonImage.x
+                    to: buttonImage.x - 10
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+                PropertyAnimation {
+                    target: t
+                    property: "x"
+                    from: t.x
+                    to: t.x - 10
+                    duration: 200
+                    easing.type: Easing.InOutQuad
+                }
+            }
+            ScriptAction{
+                script: {
+                    if(indicator.visible && !shrinkAnimation.running) {
+                        indicator.visible = false
+                        console.log("Stretch " + buttonImage.x + " add 10")
+                        buttonImage.x += 10
+                        t.x += 10
+                        console.log("Now " + buttonImage.x)
+                    }
+                }
+            }
         }
 
     }
@@ -89,20 +169,26 @@ Rectangle {
             navButton.color = navButton.isSelected ? navButton.selectedColor : navButton.baseColor
         }
     }
+    Component.onCompleted: {
+
+    }
 
     function toggleSelection(index){
         if(index === refIndex){
-            if(!isSelected) stretchAnimation.start()
+            if(!isSelected) {
+                stretchAnimation.start()
+            }
             isSelected = true;
             navButton.color = navButton.selectedColor
             buttonImage.source = navButton.imageSourceChecked
         }
         else{
-            if(isSelected) shrinkAnimation.start()
+            if(isSelected) {
+                shrinkAnimation.start()
+            }
             isSelected = false
             navButton.color = navButton.baseColor
             buttonImage.source = navButton.imageSourceUnchecked
-            indicator.scale = 0
         }
     }
 
