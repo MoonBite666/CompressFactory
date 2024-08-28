@@ -94,7 +94,7 @@ Window {
                 right: parent.right
                 bottom: parent.bottom
             }
-            color: "blue"
+            color: "#8ecae6"
         }
         Rectangle {
             anchors{
@@ -103,7 +103,7 @@ Window {
                 right: parent.right
                 bottom: parent.bottom
             }
-            color: "green"
+            color: "#a3b18a"
         }
 
     }

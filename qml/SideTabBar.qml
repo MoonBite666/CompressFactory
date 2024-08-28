@@ -27,7 +27,6 @@ Rectangle {
             imageSourceUnchecked: "qrc:/icons/unchecked/file-video.svg"
             imageSourceChecked: "qrc:/icons/checked/file-video.svg"
             text: "Video"
-            baseColor: "gray"
             onClicked: {
                 console.log("Video Clicked")
                 sideTabBar.currentIndex = 0
@@ -40,7 +39,6 @@ Rectangle {
             imageSourceUnchecked: "qrc:/icons/unchecked/file-audio.svg"
             imageSourceChecked: "qrc:/icons/checked/file-audio.svg"
             text: "Audio"
-            baseColor: "gray"
             onClicked: {
                 console.log("Audio Clicked")
                 sideTabBar.currentIndex = 1
@@ -53,7 +51,6 @@ Rectangle {
             imageSourceUnchecked: "qrc:/icons/unchecked/wrench.svg"
             imageSourceChecked: "qrc:/icons/checked/wrench.svg"
             text: "Tools"
-            baseColor: "gray"
             onClicked: {
                 console.log("Tool Clicked")
                 sideTabBar.currentIndex = 2

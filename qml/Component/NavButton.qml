@@ -7,9 +7,9 @@ Rectangle {
     width: 100
     height: 40
 
-    property color baseColor : "transparent"
-    property color hoverColor: Qt.lighter(baseColor, 1.5)
-    property color selectedColor: Qt.darker(baseColor, 1.5)
+    property color baseColor : "#F3F3F3"
+    property color hoverColor: "#DCDCDC"
+    property color selectedColor: "#DCDCDC"
 
 
     property url imageSourceUnchecked : ""
@@ -34,7 +34,7 @@ Rectangle {
         Rectangle {
             id: indicator
 
-            color: "cyan"
+            color: "#6E9FF6"
             Layout.alignment: Qt.AlignVCenter
             width: 5
             height: navButton.height * 0.6
@@ -79,7 +79,7 @@ Rectangle {
                     target: indicator
                     property: "color"
                     from: "transparent"
-                    to: "cyan"
+                    to: "#6E9FF6"
                     duration: 200
                     easing.type: Easing.InOutQuad
                 }
@@ -116,7 +116,7 @@ Rectangle {
                 PropertyAnimation {
                     target: indicator
                     property: "color"
-                    from: "cyan"
+                    from: "#6E9FF6"
                     to: "transparent"
                     duration: 200
                     easing.type: Easing.InOutQuad
