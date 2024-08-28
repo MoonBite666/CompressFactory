@@ -23,6 +23,7 @@ Rectangle {
         Layout.fillHeight: true
         NavButton{
             id: videoButton
+            refIndex: 0
             imageSourceUnchecked: "qrc:/icons/unchecked/file-video.svg"
             imageSourceChecked: "qrc:/icons/checked/file-video.svg"
             text: "Video"
@@ -35,6 +36,7 @@ Rectangle {
 
         NavButton{
             id: audioButton
+            refIndex: 1
             imageSourceUnchecked: "qrc:/icons/unchecked/file-audio.svg"
             imageSourceChecked: "qrc:/icons/checked/file-audio.svg"
             text: "Audio"
@@ -47,6 +49,7 @@ Rectangle {
 
         NavButton{
             id: toolButton
+            refIndex: 2
             imageSourceUnchecked: "qrc:/icons/unchecked/wrench.svg"
             imageSourceChecked: "qrc:/icons/checked/wrench.svg"
             text: "Tools"
@@ -55,6 +58,11 @@ Rectangle {
                 console.log("Tool Clicked")
                 sideTabBar.currentIndex = 2
             }
+        }
+        Component.onCompleted:{
+            videoButton.toggleSelection(currentIndex)
+            audioButton.toggleSelection(currentIndex)
+            toolButton.toggleSelection(currentIndex)
         }
     }
 
@@ -92,12 +100,9 @@ Rectangle {
     Connections {
        target: sideTabBar
        function onCurrentIndexChanged() {
-           videoButton.isSelected = currentIndex === 0
-           audioButton.isSelected = currentIndex === 1
-           toolButton.isSelected = currentIndex === 2
-           videoButton.toggleSelection()
-           audioButton.toggleSelection()
-           toolButton.toggleSelection()
+           videoButton.toggleSelection(currentIndex)
+           audioButton.toggleSelection(currentIndex)
+           toolButton.toggleSelection(currentIndex)
        }
     }
 }
