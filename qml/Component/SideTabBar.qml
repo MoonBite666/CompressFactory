@@ -2,8 +2,6 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls
 import QtQuick.Layouts
-import "Component"
-
 
 Rectangle {
     id: sideTabBar
@@ -21,6 +19,20 @@ Rectangle {
         // Layout.fillWidth: true
         // Layout.preferredWidth: parent.width*0.4
         Layout.fillHeight: true
+
+        ArrowButton {
+            id: arrowButton
+            onClicked: {
+                console.log("Arrow Clicked")
+                if(sideTabBar.state === "collapsed"){
+                    sideTabBar.state = "expanded"
+                }
+                else{
+                    sideTabBar.state = "collapsed"
+                }
+            }
+        }
+
         NavButton{
             id: videoButton
             refIndex: 0

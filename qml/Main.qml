@@ -4,6 +4,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 import QWindowKit 1.0
+import "Component"
 
 Window {
     id: window

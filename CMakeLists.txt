@@ -33,8 +33,9 @@ qt_add_qml_module(${PROJECT_NAME}
     VERSION 1.0
     QML_FILES
         qml/Main.qml
-        qml/SideTabBar.qml
+        qml/Component/SideTabBar.qml
         qml/Component/NavButton.qml
+        qml/Component/ArrowButton.qml
     RESOURCES
         res/resources.qrc
 )

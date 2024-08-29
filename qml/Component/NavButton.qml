@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Layouts
 
 Rectangle {
     id: navButton
@@ -131,9 +130,6 @@ Rectangle {
             navButton.color = navButton.isSelected ? navButton.selectedColor : navButton.baseColor
         }
     }
-    Component.onCompleted: {
-
-    }
 
     function toggleSelection(index){
         if(index === refIndex){
@@ -172,5 +168,4 @@ Rectangle {
             t.visible = false
         }
     }
-
 }
