@@ -60,9 +60,6 @@ Rectangle {
             videoButton.toggleSelection(currentIndex)
             audioButton.toggleSelection(currentIndex)
             toolButton.toggleSelection(currentIndex)
-            videoButton.acrossWidth("collapsed")
-            audioButton.acrossWidth("collapsed")
-            toolButton.acrossWidth("collapsed")
         }
     }
 
@@ -77,23 +74,16 @@ Rectangle {
                     toolButton.acrossWidth("collapsed")
                 }
             }
-            PropertyChanges {
-                target: sideTabBar
-                width: 60
-            }
         },
         State {
             name: "expanded"
+
             StateChangeScript {
                 script: {
                     videoButton.acrossWidth("expanded")
                     audioButton.acrossWidth("expanded")
                     toolButton.acrossWidth("expanded")
                 }
-            }
-            PropertyChanges {
-                target: sideTabBar
-                width: 150
             }
         }
     ]
@@ -102,11 +92,70 @@ Rectangle {
         Transition {
             from: "collapsed"
             to: "expanded"
-            reversible: true
-            NumberAnimation {
-                target: sideTabBar
-                property: "width"
-                duration: 200
+            ParallelAnimation{
+                NumberAnimation {
+                    target: sideTabBar
+                    property: "width"
+                    from: 60
+                    to: 150
+                    duration: 200
+                }
+                NumberAnimation {
+                    target: videoButton
+                    property: "width"
+                    from: 60
+                    to: 150
+                    duration: 200
+                }
+                NumberAnimation {
+                    target: audioButton
+                    property: "width"
+                    from: 60
+                    to: 150
+                    duration: 200
+                }
+                NumberAnimation {
+                    target: toolButton
+                    property: "width"
+                    from: 60
+                    to: 150
+                    duration: 200
+                }
+            }
+        },
+
+        Transition {
+            from: "expanded"
+            to:"collapsed"
+            ParallelAnimation{
+                NumberAnimation {
+                    target: sideTabBar
+                    property: "width"
+                    from: 150
+                    to: 60
+                    duration: 200
+                }
+                NumberAnimation {
+                    target: videoButton
+                    property: "width"
+                    from: 150
+                    to: 60
+                    duration: 200
+                }
+                NumberAnimation {
+                    target: audioButton
+                    property: "width"
+                    from: 150
+                    to: 60
+                    duration: 200
+                }
+                NumberAnimation {
+                    target: toolButton
+                    property: "width"
+                    from: 150
+                    to: 60
+                    duration: 200
+                }
             }
         }
     ]

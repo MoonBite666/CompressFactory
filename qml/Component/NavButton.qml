@@ -9,8 +9,8 @@ Rectangle {
     radius: 5
     Behavior on width {
         NumberAnimation {
-            duration: 200
-            easing.type: Easing.InOutQuad
+            duration: 1
+            // easing.type: Easing.InOutQuad
         }
     }
 
@@ -31,51 +31,41 @@ Rectangle {
 
     signal clicked()
 
-    // 图片
-    RowLayout {
+
+    Item {
         id: layout
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         anchors.leftMargin: 10
-        spacing: 5
-
-        Behavior on x {
-            NumberAnimation {
-                duration: 200
-                easing.type: Easing.InOutQuad
-            }
-        }
-
-        transitions: Transition {
-            NumberAnimation {
-                properties: "x"
-                duration: 200
-                easing.type: Easing.InOutQuad
-            }
-        }
 
 
         Rectangle {
             id: indicator
 
             color: "#6E9FF6"
-            Layout.alignment: Qt.AlignVCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 3
+            anchors.verticalCenter: parent.verticalCenter
             width: 5
             height: navButton.height * 0.6
             radius: 5
 
+
         }
         Image {
             id: buttonImage
-            // Layout.alignment: Qt.AlignLeft
-            // anchors.leftMargin: navButton.isSelected ? 0 : 10
+            anchors.left : indicator.right
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.leftMargin: 5
             source: navButton.imageSourceUnchecked
             sourceSize.height: navButton.height * 0.6
             sourceSize.width: navButton.height * 0.5
         }
         Text {
             id: t
-            Layout.alignment: Qt.AlignVCenter
+            anchors.left : buttonImage.right
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.leftMargin: 30
         }
 
         SequentialAnimation{
@@ -154,7 +144,8 @@ Rectangle {
             isSelected = true;
             navButton.color = navButton.selectedColor
             buttonImage.source = navButton.imageSourceChecked
-            buttonImage.anchors.leftMargin = 0
+            buttonImage.anchors.leftMargin = 5
+            t.anchors.leftMargin = 25
         }
         else{
             if(isSelected) {
@@ -164,7 +155,8 @@ Rectangle {
             isSelected = false
             navButton.color = navButton.baseColor
             buttonImage.source = navButton.imageSourceUnchecked
-            buttonImage.anchors.leftMargin = 10
+            buttonImage.anchors.leftMargin = 0
+            t.anchors.leftMargin = 30
         }
     }
 
@@ -174,10 +166,6 @@ Rectangle {
             navButton.width = 150
             layout.width = 150
             t.visible = true
-            if(!isSelected){
-                buttonImage.x -= 20
-                t.x -= 20
-            }
         }
         else {
             navButton.width = 60
