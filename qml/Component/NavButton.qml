@@ -4,8 +4,15 @@ import QtQuick.Layouts
 
 Rectangle {
     id: navButton
-    width: 100
+    width: parent.width
     height: 40
+    radius: 5
+    Behavior on width {
+        NumberAnimation {
+            duration: 200
+            easing.type: Easing.InOutQuad
+        }
+    }
 
     property color baseColor : "#F3F3F3"
     property color hoverColor: "#DCDCDC"
@@ -25,11 +32,28 @@ Rectangle {
     signal clicked()
 
     // 图片
-    RowLayout{
+    RowLayout {
+        id: layout
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         anchors.leftMargin: 10
         spacing: 5
+
+        Behavior on x {
+            NumberAnimation {
+                duration: 200
+                easing.type: Easing.InOutQuad
+            }
+        }
+
+        transitions: Transition {
+            NumberAnimation {
+                properties: "x"
+                duration: 200
+                easing.type: Easing.InOutQuad
+            }
+        }
+
 
         Rectangle {
             id: indicator
@@ -43,29 +67,20 @@ Rectangle {
         }
         Image {
             id: buttonImage
-            Layout.alignment: Qt.AlignLeft
+            // Layout.alignment: Qt.AlignLeft
+            // anchors.leftMargin: navButton.isSelected ? 0 : 10
             source: navButton.imageSourceUnchecked
-            sourceSize.width: parent.parent.width * 0.2
-            sourceSize.height: parent.parent.height * 0.6
+            sourceSize.height: navButton.height * 0.6
+            sourceSize.width: navButton.height * 0.5
         }
         Text {
             id: t
+            Layout.alignment: Qt.AlignVCenter
         }
 
         SequentialAnimation{
             id: stretchAnimation
             running: false
-            ScriptAction{
-                script: {
-                    if(!indicator.visible && !stretchAnimation.running){
-                        indicator.visible = true
-                        console.log("Stretch " + buttonImage.x + " sub 10")
-                        buttonImage.x -= 10
-                        t.x -= 10
-                        console.log("Now " + buttonImage.x)
-                    }
-                }
-            }
             ParallelAnimation{
                 PropertyAnimation {
                     target: indicator
@@ -80,22 +95,6 @@ Rectangle {
                     property: "color"
                     from: "transparent"
                     to: "#6E9FF6"
-                    duration: 200
-                    easing.type: Easing.InOutQuad
-                }
-                PropertyAnimation {
-                    target: buttonImage
-                    property: "x"
-                    from: buttonImage.x
-                    to: buttonImage.x + 10
-                    duration: 200
-                    easing.type: Easing.InOutQuad
-                }
-                PropertyAnimation {
-                    target: t
-                    property: "x"
-                    from: t.x
-                    to: t.x + 10
                     duration: 200
                     easing.type: Easing.InOutQuad
                 }
@@ -120,33 +119,6 @@ Rectangle {
                     to: "transparent"
                     duration: 200
                     easing.type: Easing.InOutQuad
-                }
-                PropertyAnimation {
-                    target: buttonImage
-                    property: "x"
-                    from: buttonImage.x
-                    to: buttonImage.x - 10
-                    duration: 200
-                    easing.type: Easing.InOutQuad
-                }
-                PropertyAnimation {
-                    target: t
-                    property: "x"
-                    from: t.x
-                    to: t.x - 10
-                    duration: 200
-                    easing.type: Easing.InOutQuad
-                }
-            }
-            ScriptAction{
-                script: {
-                    if(indicator.visible && !shrinkAnimation.running) {
-                        indicator.visible = false
-                        console.log("Stretch " + buttonImage.x + " add 10")
-                        buttonImage.x += 10
-                        t.x += 10
-                        console.log("Now " + buttonImage.x)
-                    }
                 }
             }
         }
@@ -176,19 +148,41 @@ Rectangle {
     function toggleSelection(index){
         if(index === refIndex){
             if(!isSelected) {
+                indicator.visible = true
                 stretchAnimation.start()
             }
             isSelected = true;
             navButton.color = navButton.selectedColor
             buttonImage.source = navButton.imageSourceChecked
+            buttonImage.anchors.leftMargin = 0
         }
         else{
             if(isSelected) {
                 shrinkAnimation.start()
+                indicator.visible = false
             }
             isSelected = false
             navButton.color = navButton.baseColor
             buttonImage.source = navButton.imageSourceUnchecked
+            buttonImage.anchors.leftMargin = 10
+        }
+    }
+
+    function acrossWidth(state){
+        console.log("in " + state + " !")
+        if(state === "expanded") {
+            navButton.width = 150
+            layout.width = 150
+            t.visible = true
+            if(!isSelected){
+                buttonImage.x -= 20
+                t.x -= 20
+            }
+        }
+        else {
+            navButton.width = 60
+            layout.width = 60
+            t.visible = false
         }
     }
 

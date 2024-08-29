@@ -7,9 +7,9 @@ import "Component"
 
 Rectangle {
     id: sideTabBar
-    width: 50 // 初始宽度，显示一小部分
+    width: 60 // 初始宽度，显示一小部分
     height: parent.height - 32
-    color: "gray"
+    color: "#F3F3F3"
 
     property int currentIndex: 0
 
@@ -18,8 +18,8 @@ Rectangle {
         id: tabBarLayout
         anchors.fill: parent
         spacing: 10
-        Layout.fillWidth: true
-        Layout.preferredWidth: parent.width*0.4
+        // Layout.fillWidth: true
+        // Layout.preferredWidth: parent.width*0.4
         Layout.fillHeight: true
         NavButton{
             id: videoButton
@@ -60,6 +60,9 @@ Rectangle {
             videoButton.toggleSelection(currentIndex)
             audioButton.toggleSelection(currentIndex)
             toolButton.toggleSelection(currentIndex)
+            videoButton.acrossWidth("collapsed")
+            audioButton.acrossWidth("collapsed")
+            toolButton.acrossWidth("collapsed")
         }
     }
 
@@ -67,16 +70,30 @@ Rectangle {
     states: [
         State {
             name: "collapsed"
+            StateChangeScript {
+                script: {
+                    videoButton.acrossWidth("collapsed")
+                    audioButton.acrossWidth("collapsed")
+                    toolButton.acrossWidth("collapsed")
+                }
+            }
             PropertyChanges {
                 target: sideTabBar
-                width: 50
+                width: 60
             }
         },
         State {
             name: "expanded"
+            StateChangeScript {
+                script: {
+                    videoButton.acrossWidth("expanded")
+                    audioButton.acrossWidth("expanded")
+                    toolButton.acrossWidth("expanded")
+                }
+            }
             PropertyChanges {
                 target: sideTabBar
-                width: 200
+                width: 150
             }
         }
     ]
