@@ -161,7 +161,6 @@ Rectangle {
     }
 
     function acrossWidth(state){
-        console.log("in " + state + " !")
         if(state === "expanded") {
             navButton.width = 150
             layout.width = 150
