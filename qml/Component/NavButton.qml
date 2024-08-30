@@ -9,7 +9,6 @@ Rectangle {
     Behavior on width {
         NumberAnimation {
             duration: 1
-            // easing.type: Easing.InOutQuad
         }
     }
 
@@ -60,16 +59,39 @@ Rectangle {
             sourceSize.height: navButton.height * 0.6
             sourceSize.width: navButton.height * 0.5
         }
-        Text {
-            id: t
-            anchors.left : buttonImage.right
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.leftMargin: 30
-            font.pixelSize: 18
-            Component.onCompleted: {
-                t.font.family = getFontFamily(text)
+
+        Rectangle {
+            id: textRect
+            width: navButton.width - indicator.width  - buttonImage.width + 20
+            height: parent.height
+            color: "transparent"
+            Text {
+                id: t
+                anchors.centerIn: parent
+                font.pixelSize: 16
+                Component.onCompleted: {
+                    t.font.family = getFontFamily(text)
+                }
+            }
+            PropertyAnimation {
+                id: textFadein
+                target: t
+                property: "color"
+                from: "transparent"
+                to: "black"
+                duration: 200
+            }
+            PropertyAnimation {
+                id: textFadeout
+                target: t
+                property: "color"
+                from: "black"
+                to: "transparent"
+                duration: 200
             }
         }
+
+
 
         SequentialAnimation{
             id: stretchAnimation
@@ -145,7 +167,6 @@ Rectangle {
             navButton.color = navButton.selectedColor
             buttonImage.source = navButton.imageSourceChecked
             buttonImage.anchors.leftMargin = 5
-            t.anchors.leftMargin = 25
         }
         else{
             if(isSelected) {
@@ -156,7 +177,6 @@ Rectangle {
             navButton.color = navButton.baseColor
             buttonImage.source = navButton.imageSourceUnchecked
             buttonImage.anchors.leftMargin = 0
-            t.anchors.leftMargin = 30
         }
     }
 
@@ -164,12 +184,12 @@ Rectangle {
         if(state === "expanded") {
             navButton.width = 150
             layout.width = 150
-            t.visible = true
+            textFadein.start()
         }
         else {
             navButton.width = 60
             layout.width = 60
-            t.visible = false
+            textFadeout.start()
         }
     }
 
