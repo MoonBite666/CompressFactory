@@ -65,6 +65,10 @@ Rectangle {
             anchors.left : buttonImage.right
             anchors.verticalCenter: parent.verticalCenter
             anchors.leftMargin: 30
+            font.pixelSize: 18
+            Component.onCompleted: {
+                t.font.family = getFontFamily(text)
+            }
         }
 
         SequentialAnimation{
@@ -166,6 +170,15 @@ Rectangle {
             navButton.width = 60
             layout.width = 60
             t.visible = false
+        }
+    }
+
+    function getFontFamily(text){
+        var chineseRegex = /[\u4e00-\u9fa5]/;
+        if (chineseRegex.test(text)) {
+            return "SimHei";
+        } else {
+            return "Arial";
         }
     }
 }

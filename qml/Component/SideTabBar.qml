@@ -50,7 +50,7 @@ Rectangle {
             refIndex: 1
             imageSourceUnchecked: "qrc:/icons/unchecked/file-audio.svg"
             imageSourceChecked: "qrc:/icons/checked/file-audio.svg"
-            text: "Audio"
+            text: "音频"
             onClicked: {
                 console.log("Audio Clicked")
                 sideTabBar.currentIndex = 1
