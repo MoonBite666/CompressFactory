@@ -74,19 +74,6 @@ Window {
             }
             color: "lightgray"
 
-            // 打开菜单按钮
-            Button {
-                text: qsTr("expand/collapsed")
-                anchors.centerIn: parent
-                onClicked: {
-                    if(sideTabBar.state === "collapsed"){
-                        sideTabBar.state = "expanded"
-                    }
-                    else{
-                        sideTabBar.state = "collapsed"
-                    }
-                }
-            }
         }
         Rectangle {
             anchors{
@@ -96,18 +83,6 @@ Window {
                 bottom: parent.bottom
             }
             color: "#8ecae6"
-            Button {
-                text: qsTr("expand/collapsed")
-                anchors.centerIn: parent
-                onClicked: {
-                    if(sideTabBar.state === "collapsed"){
-                        sideTabBar.state = "expanded"
-                    }
-                    else{
-                        sideTabBar.state = "collapsed"
-                    }
-                }
-            }
         }
         Rectangle {
             anchors{

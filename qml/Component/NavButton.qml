@@ -68,10 +68,8 @@ Rectangle {
             Text {
                 id: t
                 anchors.centerIn: parent
-                font.pixelSize: 16
-                Component.onCompleted: {
-                    t.font.family = getFontFamily(text)
-                }
+                font.pixelSize: 15
+                font.family: customFont.name
             }
             PropertyAnimation {
                 id: textFadein
@@ -193,12 +191,8 @@ Rectangle {
         }
     }
 
-    function getFontFamily(text){
-        var chineseRegex = /[\u4e00-\u9fa5]/;
-        if (chineseRegex.test(text)) {
-            return "SimHei";
-        } else {
-            return "Arial";
-        }
+    FontLoader {
+        id: customFont
+        source: "qrc:/fonts/AlibabaPuHuiTi-3-65-Medium.ttf"
     }
 }
