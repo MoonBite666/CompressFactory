@@ -16,12 +16,13 @@ Rectangle {
         id: tabBarLayout
         anchors.fill: parent
         spacing: 10
-        // Layout.fillWidth: true
+        Layout.fillWidth: true
         // Layout.preferredWidth: parent.width*0.4
         Layout.fillHeight: true
 
         ArrowButton {
             id: arrowButton
+            width: parent.width
             onClicked: {
                 console.log("Arrow Clicked")
                 if(sideTabBar.state === "collapsed"){
@@ -113,6 +114,13 @@ Rectangle {
                     duration: 200
                 }
                 NumberAnimation {
+                    target: arrowButton
+                    property: "width"
+                    from: 60
+                    to: 150
+                    duration: 200
+                }
+                NumberAnimation {
                     target: videoButton
                     property: "width"
                     from: 60
@@ -142,6 +150,13 @@ Rectangle {
             ParallelAnimation{
                 NumberAnimation {
                     target: sideTabBar
+                    property: "width"
+                    from: 150
+                    to: 60
+                    duration: 200
+                }
+                NumberAnimation {
+                    target: arrowButton
                     property: "width"
                     from: 150
                     to: 60

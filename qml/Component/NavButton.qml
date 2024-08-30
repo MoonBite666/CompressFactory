@@ -15,7 +15,7 @@ Rectangle {
 
     property color baseColor : "#F3F3F3"
     property color hoverColor: "#DCDCDC"
-    property color selectedColor: "#DCDCDC"
+    property color selectedColor: "#E0E0E0"
 
 
     property url imageSourceUnchecked : ""
@@ -128,7 +128,7 @@ Rectangle {
         }
 
         onEntered: {
-            navButton.color = navButton.hoverColor // 改变背景颜色
+            navButton.color = navButton.hoverColor
         }
         onExited: {
             navButton.color = navButton.isSelected ? navButton.selectedColor : navButton.baseColor

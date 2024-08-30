@@ -3,14 +3,13 @@ import QtQuick.Controls
 
 Rectangle {
     id: arrowButton
-    width: parent.width
     height: 40
     radius: 5
 
-    color: "#F3F3F3"
-
-    property url imageSourceUnchecked : "qrc:/icons/unchecked/arrow-right.svg"
-    property url imageSourceChecked : "qrc:/icons/checked/arrow-right.svg"
+    property color baseColor : "#F3F3F3"
+    property color hoverColor: "#DCDCDC"
+    property color selectedColor: "#ECECEC"
+    color: baseColor
 
     property bool isSelected: false
 
@@ -19,50 +18,46 @@ Rectangle {
     Image {
         id: buttonImage
         anchors.centerIn: parent
-        source : arrowButton.imageSourceUnchecked
+        source : "qrc:/icons/other/arrow-right-arrow-left.svg"
         sourceSize.height: arrowButton.height * 0.6
         sourceSize.width: arrowButton.height * 0.5
 
-        transform: Rotation {
-            id: rotation
-            origin.x: buttonImage.width / 2
-            origin.y: buttonImage.height / 2
-            angle: 0
+        transform: Rotation{
+            id: trans
+            origin.x: arrowButton.width / 16
+            origin.y: arrowButton.height / 2
+
+            axis.x: 0
+            axis.y: 1
+            axis.z: 0
+
+            angle: 180
         }
 
         ParallelAnimation {
             id: checkAnimation
             PropertyAnimation {
-                target: rotation
-                property: "angle"
+                target: trans
+                property:  "angle"
                 from: 0
                 to: 180
                 duration: 200
-            }
-
-            ScriptAction {
-                script: {
-                    buttonImage.anchors.centerIn = arrowButton
-                }
             }
         }
 
         ParallelAnimation {
             id: uncheckAnimation
             PropertyAnimation {
-                target: rotation
-                property: "angle"
+                target: trans
+                property:  "angle"
                 from: 180
-                to: 360
+                to: 0
                 duration: 200
             }
+        }
 
-            ScriptAction {
-                script: {
-                    buttonImage.anchors.right = arrowButton.right
-                    buttonImage.anchors.rightMargin = 10
-                }
-            }
+        Component.onCompleted:{
+            uncheckAnimation.start()
         }
     }
 
@@ -75,21 +70,19 @@ Rectangle {
             arrowButton.clicked()
             arrowButton.isSelected = !arrowButton.isSelected
             if(arrowButton.isSelected){
-                buttonImage.source = arrowButton.imageSourceChecked
                 checkAnimation.start()
             }
             else {
-                buttonImage.source = arrowButton.imageSourceUnchecked
                 uncheckAnimation.start()
             }
-
+            // mouseArea.anchors.fill = parent
         }
 
         onEntered: {
-            buttonImage.source = arrowButton.imageSourceChecked
+            arrowButton.color = arrowButton.hoverColor
         }
         onExited: {
-            buttonImage.source = arrowButton.imageSourceUnchecked
+            arrowButton.color = arrowButton.isSelected ? arrowButton.selectedColor : arrowButton.baseColor
         }
     }
 
