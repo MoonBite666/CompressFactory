@@ -60,21 +60,15 @@ Window {
         state: "collapsed"
     }
     StackLayout{
+        id: stack
         z:-1
         width: parent.width
         anchors.top: titleBar.bottom
         anchors.bottom: parent.bottom
+        anchors.left: sideTabBar.right
         currentIndex: sideTabBar.currentIndex
-        Rectangle {
-            anchors{
-                top: titleBar.bottom
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
-            color: "lightgray"
 
-        }
+        Video {}
         Rectangle {
             anchors{
                 top: titleBar.bottom

@@ -33,9 +33,11 @@ qt_add_qml_module(${PROJECT_NAME}
     VERSION 1.0
     QML_FILES
         qml/Main.qml
+        qml/Video.qml
         qml/Component/SideTabBar.qml
         qml/Component/NavButton.qml
         qml/Component/ArrowButton.qml
+        qml/Component/FileInput.qml
     RESOURCES
         res/resources.qrc
 )
